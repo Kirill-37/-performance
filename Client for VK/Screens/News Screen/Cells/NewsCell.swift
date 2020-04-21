@@ -6,6 +6,7 @@
 //  Copyright © 2019 Кирилл Харузин. All rights reserved.
 //
 
+// MARK: HW №1 -performance
 import UIKit
 
 class NewsCell: UITableViewCell {
