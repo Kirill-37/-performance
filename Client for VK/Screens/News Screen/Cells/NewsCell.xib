@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyNews" rowHeight="628" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-i7-Jjw" customClass="NewsCell" customModule="Client_for_VK" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="455" height="628"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="455" height="628"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="природа" translatesAutoresizingMaskIntoConstraints="NO" id="5q1-Zi-99r">
+                        <rect key="frame" x="10" y="10" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="BCZ-y4-zD2"/>
+                            <constraint firstAttribute="width" secondItem="5q1-Zi-99r" secondAttribute="height" multiplier="1:1" id="l6a-fn-dqU"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="FA9-iL-iM5">
+                        <rect key="frame" x="70" y="3" width="375" height="64"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdg-sr-9TF">
+                                <rect key="frame" x="0.0" y="0.0" width="78.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub2-Ll-13M">
+                                <rect key="frame" x="0.0" y="50.5" width="29.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NjN-9b-5vH">
+                        <rect key="frame" x="10" y="77" width="435" height="576.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8w5-xe-sLU">
+                                <rect key="frame" x="0.0" y="0.0" width="435" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newBoeing" translatesAutoresizingMaskIntoConstraints="NO" id="Rjf-KH-i3G">
+                                <rect key="frame" x="0.0" y="30.5" width="435" height="435"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Rjf-KH-i3G" secondAttribute="height" multiplier="1:1" id="Mwx-AJ-FhM"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="4iy-m3-dC6">
+                                <rect key="frame" x="0.0" y="475.5" width="435" height="101"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlG-Fe-0tW" customClass="LikeButton" customModule="Client_for_VK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="35.5" width="128.5" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="addLike:" destination="KGk-i7-Jjw" eventType="touchDown" id="HBP-kn-YzJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbi-8E-JBn">
+                                        <rect key="frame" x="153.5" y="36.5" width="128" height="28.5"/>
+                                        <state key="normal" image="bubble.left" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsm-ge-cme">
+                                        <rect key="frame" x="306.5" y="37.5" width="128.5" height="26.5"/>
+                                        <state key="normal" image="arrowshape.turn.up.right" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5q1-Zi-99r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2cI-T6-Vgt"/>
+                    <constraint firstItem="FA9-iL-iM5" firstAttribute="leading" secondItem="5q1-Zi-99r" secondAttribute="trailing" constant="10" id="6pD-sh-XoN"/>
+                    <constraint firstAttribute="bottom" secondItem="PlG-Fe-0tW" secondAttribute="bottom" constant="10" id="IK4-fd-SaS"/>
+                    <constraint firstItem="5q1-Zi-99r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="SkP-RT-rz0"/>
+                    <constraint firstAttribute="trailing" secondItem="FA9-iL-iM5" secondAttribute="trailing" constant="10" id="Tek-Cb-3HZ"/>
+                    <constraint firstItem="FA9-iL-iM5" firstAttribute="centerY" secondItem="5q1-Zi-99r" secondAttribute="centerY" id="X0n-hX-DeG"/>
+                    <constraint firstItem="NjN-9b-5vH" firstAttribute="top" secondItem="FA9-iL-iM5" secondAttribute="bottom" constant="10" id="a8n-jG-173"/>
+                    <constraint firstItem="8w5-xe-sLU" firstAttribute="top" secondItem="FA9-iL-iM5" secondAttribute="bottom" constant="10" id="adJ-ED-Vng"/>
+                    <constraint firstAttribute="trailing" secondItem="NjN-9b-5vH" secondAttribute="trailing" constant="10" id="pAO-tf-PMa"/>
+                    <constraint firstItem="NjN-9b-5vH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="sNp-l6-rDy"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="avatar" destination="5q1-Zi-99r" id="Tkk-Mj-dTj"/>
+                <outlet property="likeButton" destination="PlG-Fe-0tW" id="USi-nm-R7C"/>
+                <outlet property="news" destination="8w5-xe-sLU" id="lgu-hZ-ai7"/>
+                <outlet property="time" destination="Ub2-Ll-13M" id="8Ey-Jg-HIY"/>
+                <outlet property="username" destination="Cdg-sr-9TF" id="D8U-ps-frR"/>
+            </connections>
+            <point key="canvasLocation" x="-1358.6956521739132" y="75"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrowshape.turn.up.right" catalog="system" width="64" height="52"/>
+        <image name="bubble.left" catalog="system" width="64" height="54"/>
+        <image name="newBoeing" width="260" height="260"/>
+        <image name="природа" width="134" height="75"/>
+    </resources>
+</document>
