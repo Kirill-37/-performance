@@ -28,7 +28,7 @@ class GroupList: UITableViewController {
     do {
         let realm = try Realm()
         let groupsLetters = Array( Set( realm.objects(Groups.self).compactMap{ $0.name.first?.lowercased() } ) ).sorted()
-        sections = groupsLetters.map{ realm.objects(Groups.self).filter("name BEGINSWITH[c] %@", $0) }
+        sections = groupsLetters.map{ realm.objects(Groups.self).filter("name BEGINSWITH[cd] %@", $0) }
         tokens.removeAll()
         sections.enumerated().forEach{ observeChanges(for: $0.offset, results: $0.element) }
         tableView.reloadData()
@@ -43,7 +43,6 @@ class GroupList: UITableViewController {
             switch changes {
             case .initial:
                 self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-                self.tableView.beginUpdates()
             case .update(_, let deletions, let insertions, let modifications):
                 self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: section) }, with: .automatic)

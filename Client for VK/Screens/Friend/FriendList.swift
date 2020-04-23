@@ -27,7 +27,7 @@ class FriendList: UITableViewController {
     do {
         let realm = try Realm()
         let friendsLetters = Array( Set( realm.objects(Friends.self).compactMap{ $0.name.first?.lowercased() } ) ).sorted()
-        sections = friendsLetters.map{ realm.objects(Friends.self).filter("name BEGINSWITH[c] %@", $0) }
+        sections = friendsLetters.map{ realm.objects(Friends.self).filter("name BEGINSWITH[cd] %@", $0) }
         tokens.removeAll()
         sections.enumerated().forEach{ observeChanges(for: $0.offset, results: $0.element) }
         tableView.reloadData()
@@ -42,7 +42,6 @@ class FriendList: UITableViewController {
             switch changes {
             case .initial:
                 self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-                self.tableView.beginUpdates()
             case .update(_, let deletions, let insertions, let modifications):
                 self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
