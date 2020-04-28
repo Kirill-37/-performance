@@ -14,6 +14,7 @@ import RealmSwift
 class FriendList: UITableViewController {
     
     let vkAPI = VKApi()
+    let parser = ParserService()
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -58,8 +59,12 @@ class FriendList: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFriendsSections()
+        
         vkAPI.getFriends(token: UserSession.shared.token)
+           DispatchQueue.main.async {
+           self.tableView.reloadData()
+           self.loadFriendsSections()
+        }
         
         //searchBar.delegate = self
         
@@ -91,7 +96,7 @@ class FriendList: UITableViewController {
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
                 if self.cachedAvatars[url] == nil {
-                    if let image = self.vkAPI.getImageByURL(imageUrl: url) {
+                    if let image = self.parser.getImageByURL(imageUrl: url) {
                         self.cachedAvatars[url] = image
                         
                         DispatchQueue.main.async {
