@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NSW-D1-3da">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -391,11 +391,12 @@
                                                 <constraint firstAttribute="width" constant="50" id="3zw-mN-RDx"/>
                                                 <constraint firstAttribute="width" secondItem="day-bi-2qh" secondAttribute="height" multiplier="1:1" id="For-yz-KM0"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="25"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svg-KO-hhs" customClass="CircleImageView" customModule="Client_for_VK" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="10" width="50" height="50"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Имя Фамилия" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3RJ-Pa-Lqs">
                                             <rect key="frame" x="64" y="23" width="295" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
@@ -404,20 +405,15 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="svg-KO-hhs" firstAttribute="bottom" secondItem="day-bi-2qh" secondAttribute="bottom" id="7IO-gc-iW2"/>
                                         <constraint firstItem="day-bi-2qh" firstAttribute="centerY" secondItem="Ohx-SZ-yQh" secondAttribute="centerY" id="9HX-kk-ZOP"/>
                                         <constraint firstAttribute="trailing" secondItem="3RJ-Pa-Lqs" secondAttribute="trailing" constant="10" id="Ipj-GP-Mq4"/>
                                         <constraint firstItem="3RJ-Pa-Lqs" firstAttribute="leading" secondItem="day-bi-2qh" secondAttribute="trailing" constant="10" id="PZR-3q-J6p"/>
-                                        <constraint firstItem="svg-KO-hhs" firstAttribute="top" secondItem="day-bi-2qh" secondAttribute="top" id="R05-IQ-ovk"/>
                                         <constraint firstItem="3RJ-Pa-Lqs" firstAttribute="centerY" secondItem="Ohx-SZ-yQh" secondAttribute="centerY" id="Srg-1a-J6J"/>
                                         <constraint firstItem="day-bi-2qh" firstAttribute="leading" secondItem="Ohx-SZ-yQh" secondAttribute="leading" constant="10" id="k98-LE-wuO"/>
-                                        <constraint firstItem="svg-KO-hhs" firstAttribute="leading" secondItem="day-bi-2qh" secondAttribute="leading" id="nQg-Xt-Lgr"/>
-                                        <constraint firstItem="svg-KO-hhs" firstAttribute="trailing" secondItem="day-bi-2qh" secondAttribute="trailing" id="wtY-XC-Uvo"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="avatar" destination="day-bi-2qh" id="Qqm-bU-bHX"/>
-                                    <outlet property="circleAvatar" destination="svg-KO-hhs" id="SXj-1P-WyR"/>
                                     <outlet property="username" destination="3RJ-Pa-Lqs" id="P0F-c6-WLp"/>
                                 </connections>
                             </tableViewCell>

@@ -14,6 +14,7 @@ import RealmSwift
 class FriendList: UITableViewController {
     
     let vkAPI = VKApi()
+    let parser = ParserService()
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -27,7 +28,7 @@ class FriendList: UITableViewController {
     do {
         let realm = try Realm()
         let friendsLetters = Array( Set( realm.objects(Friends.self).compactMap{ $0.name.first?.lowercased() } ) ).sorted()
-        sections = friendsLetters.map{ realm.objects(Friends.self).filter("name BEGINSWITH[c] %@", $0) }
+        sections = friendsLetters.map{ realm.objects(Friends.self).filter("name BEGINSWITH[cd] %@", $0) }
         tokens.removeAll()
         sections.enumerated().forEach{ observeChanges(for: $0.offset, results: $0.element) }
         tableView.reloadData()
@@ -42,7 +43,6 @@ class FriendList: UITableViewController {
             switch changes {
             case .initial:
                 self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-                self.tableView.beginUpdates()
             case .update(_, let deletions, let insertions, let modifications):
                 self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
@@ -59,8 +59,12 @@ class FriendList: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFriendsSections()
+        
         vkAPI.getFriends(token: UserSession.shared.token)
+           DispatchQueue.main.async {
+           self.tableView.reloadData()
+           self.loadFriendsSections()
+        }
         
         //searchBar.delegate = self
         
@@ -92,7 +96,7 @@ class FriendList: UITableViewController {
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
                 if self.cachedAvatars[url] == nil {
-                    if let image = self.vkAPI.getImageByURL(imageUrl: url) {
+                    if let image = self.parser.getImageByURL(imageUrl: url) {
                         self.cachedAvatars[url] = image
                         
                         DispatchQueue.main.async {

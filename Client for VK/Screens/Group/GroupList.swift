@@ -16,6 +16,7 @@ class GroupList: UITableViewController {
       @IBOutlet weak var searchBarGroup: UISearchBar!
     
     let vkAPI = VKApi()
+    let parser = ParserService()
     
     
     
@@ -28,7 +29,7 @@ class GroupList: UITableViewController {
     do {
         let realm = try Realm()
         let groupsLetters = Array( Set( realm.objects(Groups.self).compactMap{ $0.name.first?.lowercased() } ) ).sorted()
-        sections = groupsLetters.map{ realm.objects(Groups.self).filter("name BEGINSWITH[c] %@", $0) }
+        sections = groupsLetters.map{ realm.objects(Groups.self).filter("name BEGINSWITH[cd] %@", $0) }
         tokens.removeAll()
         sections.enumerated().forEach{ observeChanges(for: $0.offset, results: $0.element) }
         tableView.reloadData()
@@ -43,7 +44,6 @@ class GroupList: UITableViewController {
             switch changes {
             case .initial:
                 self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-                self.tableView.beginUpdates()
             case .update(_, let deletions, let insertions, let modifications):
                 self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
@@ -60,9 +60,11 @@ class GroupList: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGroupsSections()
         vkAPI.getGroups(token: UserSession.shared.token)
-        
+        DispatchQueue.main.async {
+            self.loadGroupsSections()
+            self.tableView.reloadData()
+        }
         //searchBar.delegate = self
         
         }
@@ -92,7 +94,7 @@ class GroupList: UITableViewController {
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
                 if self.cachedAvatars[url] == nil {
-                    if let image = self.vkAPI.getImageByURL(imageUrl: url) {
+                    if let image = self.parser.getImageByURL(imageUrl: url) {
                         self.cachedAvatars[url] = image
                         
                         DispatchQueue.main.async {
