@@ -42,6 +42,33 @@ class DataBaseService {
             friend.photos.append(objectsIn: photos)
         }
     }
+    
+    static func saveNews(news: [News],
+                    configaration: Realm.Configuration = deleteIfMigration,
+                     update: Realm.UpdatePolicy = .modified) throws {
+    let realm = try Realm(configuration: configaration)
+    try realm.write {
+        realm.add(news, update: update)
+        }
+    }
+    
+    static func saveSourceGroups(sourseGroups: [NewsSource],
+                    configaration: Realm.Configuration = deleteIfMigration,
+                     update: Realm.UpdatePolicy = .modified) throws {
+    let realm = try Realm(configuration: configaration)
+    try realm.write {
+        realm.add(sourseGroups, update: update)
+        }
+    }
+    
+    static func saveSourceUsers(sourseUsers: [NewsSource],
+                    configaration: Realm.Configuration = deleteIfMigration,
+                     update: Realm.UpdatePolicy = .modified) throws {
+    let realm = try Realm(configuration: configaration)
+    try realm.write {
+        realm.add(sourseUsers, update: update)
+        }
+    }
         
 }
 

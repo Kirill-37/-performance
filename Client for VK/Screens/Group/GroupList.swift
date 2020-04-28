@@ -16,6 +16,7 @@ class GroupList: UITableViewController {
       @IBOutlet weak var searchBarGroup: UISearchBar!
     
     let vkAPI = VKApi()
+    let parser = ParserService()
     
     
     
@@ -59,9 +60,11 @@ class GroupList: UITableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadGroupsSections()
         vkAPI.getGroups(token: UserSession.shared.token)
-        
+        DispatchQueue.main.async {
+            self.loadGroupsSections()
+            self.tableView.reloadData()
+        }
         //searchBar.delegate = self
         
         }
@@ -91,7 +94,7 @@ class GroupList: UITableViewController {
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
                 if self.cachedAvatars[url] == nil {
-                    if let image = self.vkAPI.getImageByURL(imageUrl: url) {
+                    if let image = self.parser.getImageByURL(imageUrl: url) {
                         self.cachedAvatars[url] = image
                         
                         DispatchQueue.main.async {
