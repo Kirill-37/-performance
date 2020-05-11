@@ -49,6 +49,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(hideAction)
         
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         login.delegate = self
         password.delegate = self
         //createFriends()

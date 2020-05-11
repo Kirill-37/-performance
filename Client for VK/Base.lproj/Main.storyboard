@@ -415,6 +415,7 @@
                                 <connections>
                                     <outlet property="avatar" destination="day-bi-2qh" id="Qqm-bU-bHX"/>
                                     <outlet property="username" destination="3RJ-Pa-Lqs" id="P0F-c6-WLp"/>
+                                    <segue destination="U4K-iW-Mr3" kind="show" identifier="toPhoto" id="tXw-iC-Jtg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -423,13 +424,8 @@
                             <outlet property="delegate" destination="oWo-MZ-pth" id="Con-RD-eNt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Friends" id="l26-fJ-as1">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrowshape.turn.up.right" catalog="system" id="NZr-Em-ra4"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Friends" id="l26-fJ-as1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="SearchBar" destination="QTm-it-UcI" id="koI-iY-Wzc"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iAv-3V-3ut" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -496,7 +492,6 @@
         <segue reference="621-OW-TTn"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrowshape.turn.up.right" catalog="system" width="128" height="106"/>
         <image name="circle.grid.3x3" catalog="system" width="128" height="110"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>

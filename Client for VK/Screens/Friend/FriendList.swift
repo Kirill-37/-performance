@@ -14,10 +14,8 @@ import RealmSwift
 class FriendList: UITableViewController {
     
     let vkAPI = VKApi()
-    let parser = ParserService()
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
     
     var sections: [Results<Friends>] = []
     var tokens: [NotificationToken] = []
@@ -96,7 +94,7 @@ class FriendList: UITableViewController {
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
                 if self.cachedAvatars[url] == nil {
-                    if let image = self.parser.getImageByURL(imageUrl: url) {
+                    if let image = self.vkAPI.getImageByURL(imageUrl: url) {
                         self.cachedAvatars[url] = image
                         
                         DispatchQueue.main.async {
@@ -172,6 +170,19 @@ class FriendList: UITableViewController {
             catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toPhoto" {
+            guard let friendPhotoController = segue.destination as? PhotoController else { return }
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                friendPhotoController.user = sections[indexPath.section][indexPath.row]
+            }
+            
+            
         }
     }
 }

@@ -11,6 +11,11 @@ import UIKit
 
 class Photos: Object {
     @objc dynamic var id: Int = 0
-    @objc dynamic var ownerID: Int = 0
+    @objc dynamic var ownerId: Int = 0
     @objc dynamic var imageURL: String = ""
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
+    
 }

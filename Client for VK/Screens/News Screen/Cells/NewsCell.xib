@@ -36,8 +36,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub2-Ll-13M">
-                                <rect key="frame" x="0.0" y="50.5" width="29.5" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.12.20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub2-Ll-13M">
+                                <rect key="frame" x="0.0" y="50.5" width="43.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newBoeing" translatesAutoresizingMaskIntoConstraints="NO" id="Rjf-KH-i3G">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newBoeing" translatesAutoresizingMaskIntoConstraints="NO" id="Rjf-KH-i3G" userLabel="pic">
                                 <rect key="frame" x="0.0" y="30.5" width="435" height="435"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Rjf-KH-i3G" secondAttribute="height" multiplier="1:1" id="Mwx-AJ-FhM"/>
@@ -69,13 +69,13 @@
                                             <action selector="addLike:" destination="KGk-i7-Jjw" eventType="touchDown" id="HBP-kn-YzJ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbi-8E-JBn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbi-8E-JBn" userLabel="comment">
                                         <rect key="frame" x="153.5" y="36.5" width="128" height="28.5"/>
                                         <state key="normal" image="bubble.left" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsm-ge-cme">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsm-ge-cme" userLabel="reposts">
                                         <rect key="frame" x="306.5" y="37.5" width="128.5" height="26.5"/>
                                         <state key="normal" image="arrowshape.turn.up.right" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
@@ -104,6 +104,7 @@
                 <outlet property="avatar" destination="5q1-Zi-99r" id="Tkk-Mj-dTj"/>
                 <outlet property="likeButton" destination="PlG-Fe-0tW" id="USi-nm-R7C"/>
                 <outlet property="news" destination="8w5-xe-sLU" id="lgu-hZ-ai7"/>
+                <outlet property="pic" destination="Rjf-KH-i3G" id="M3X-b5-JWo"/>
                 <outlet property="time" destination="Ub2-Ll-13M" id="8Ey-Jg-HIY"/>
                 <outlet property="username" destination="Cdg-sr-9TF" id="D8U-ps-frR"/>
             </connections>

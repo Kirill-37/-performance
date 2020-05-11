@@ -59,16 +59,7 @@ func parseFriends(data: Data) -> [Friends] {
         }
     }
 
-        func getImageByURL(imageUrl: String) -> UIImage? {
-            let urlString = imageUrl
-                guard let url = URL(string: urlString) else { return nil }
-                
-                if let imageData: Data = try? Data(contentsOf: url) {
-                    return UIImage(data: imageData)
-                }
-                
-                return nil
-        }
+      
 
 
         func parsePhotos(data: Data) -> [Photos] {
@@ -80,7 +71,7 @@ func parseFriends(data: Data) -> [Friends] {
                 let photo = Photos()
                 
                 photo.id = item["id"].intValue
-                photo.ownerID = item["owner_id"].intValue
+                photo.ownerId = item["owner_id"].intValue
                 
                 let sizeValues = item["sizes"].arrayValue
                 if let first = sizeValues.first(where: { $0["type"].stringValue == "z" }) {

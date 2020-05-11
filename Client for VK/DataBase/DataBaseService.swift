@@ -11,64 +11,72 @@ import RealmSwift
 
 class DataBaseService {
     
-    static let deleteIfMigration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+    func saveObjects(objects: [Object]) {
+                do {
+                    let realm = try Realm()
+                    print(realm.configuration.fileURL!)
+                    realm.beginWrite()
+                    realm.add(objects, update: .modified)
+                    try realm.commitWrite()
+                }
+                catch {
+                    print(error.localizedDescription)
+                }
+            }
     
-    static func saveFriends(friends: [Friends],
-              configaration: Realm.Configuration = deleteIfMigration,
-                     update: Realm.UpdatePolicy = .modified) throws {
-    let realm = try Realm(configuration: configaration)
-    print(realm.configuration.fileURL)
-    try realm.write {
-        realm.add(friends, update: update)
+    
+    func saveObject(object: Object) {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.add(object, update: .modified)
+            try realm.commitWrite()
+        }
+        catch {
+            print(error.localizedDescription)
         }
     }
     
-    static func saveGroups(groups: [Groups],
-                    configaration: Realm.Configuration = deleteIfMigration,
-                     update: Realm.UpdatePolicy = .modified) throws {
-    let realm = try Realm(configuration: configaration)
-    try realm.write {
-        realm.add(groups, update: update)
+    
+    func deleteObject(object: Object) {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.delete(object)
+            try realm.commitWrite()
+        } catch {
+            print(error.localizedDescription)
         }
+        
     }
 
-    static func savePhotos(_ photos: [Photos], friendId: Int) {
+    func getNewsSourceById(id: Int) -> NewsSource? {
+        do {
+            let realm = try Realm()
+            let newsSource = realm.objects(NewsSource.self).filter("id = %@", abs(id)).first
+            return newsSource
+            
+        } catch {
+            print(error.localizedDescription)
+            return NewsSource()
+        }
 
-        guard let realm = try? Realm(),
-              let friend = realm.object(ofType: Friends.self, forPrimaryKey: friendId) else { return }
+    }
+    
+    func getUserPhotos(ownerId: Int) -> [Photos] {
+        do {
+            let realm = try Realm()
+            let photos = realm.objects(Photos.self).filter("ownerId = %@", ownerId)
+            return Array(photos)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }
+    
 
-        try? realm.write {
-            realm.add(photos, update: .modified)
-            friend.photos.append(objectsIn: photos)
-        }
-    }
     
-    static func saveNews(news: [News],
-                    configaration: Realm.Configuration = deleteIfMigration,
-                     update: Realm.UpdatePolicy = .modified) throws {
-    let realm = try Realm(configuration: configaration)
-    try realm.write {
-        realm.add(news, update: update)
-        }
-    }
     
-    static func saveSourceGroups(sourseGroups: [NewsSource],
-                    configaration: Realm.Configuration = deleteIfMigration,
-                     update: Realm.UpdatePolicy = .modified) throws {
-    let realm = try Realm(configuration: configaration)
-    try realm.write {
-        realm.add(sourseGroups, update: update)
-        }
-    }
-    
-    static func saveSourceUsers(sourseUsers: [NewsSource],
-                    configaration: Realm.Configuration = deleteIfMigration,
-                     update: Realm.UpdatePolicy = .modified) throws {
-    let realm = try Realm(configuration: configaration)
-    try realm.write {
-        realm.add(sourseUsers, update: update)
-        }
-    }
         
 }
 

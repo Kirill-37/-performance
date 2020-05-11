@@ -15,6 +15,7 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var pic: UIImageView!
     
     @IBOutlet weak var news: UILabel!
     
