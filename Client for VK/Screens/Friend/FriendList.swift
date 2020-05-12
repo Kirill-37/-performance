@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import RealmSwift
+import Alamofire
 
 
 class FriendList: UITableViewController {
@@ -21,6 +22,15 @@ class FriendList: UITableViewController {
     var tokens: [NotificationToken] = []
     var cachedAvatars = [String: UIImage]()
     var requestHandler: UInt = 0
+    
+   private let requestUrl = "https://api.vk.com/method/friends.get"
+      private let params: Parameters = [
+          "access_token" : UserSession.shared.token,
+          "fields" : "photo_50",
+          "v" : "5.103"
+      ]
+
+    private let opq = OperationQueue()
     
     func loadFriendsSections() {
     do {
@@ -58,11 +68,31 @@ class FriendList: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        vkAPI.getFriends(token: UserSession.shared.token)
+        opq.qualityOfService = .userInteractive
+        
+        let request = AF.request(requestUrl, parameters: params)
+        
+        let getDataOperation = GetDataOperation(request: request)
+        opq.addOperation(getDataOperation)
+        
+        let parseUser = ParseUserOperation()
+        
+        parseUser.addDependency(getDataOperation)
+        opq.addOperation(parseUser)
+
+        
+        parseUser.completionBlock = {
+            OperationQueue.main.addOperation {
+                self.loadFriendsSections()
+                
+            }
+        }
+        
+       /* vkAPI.getFriends(token: UserSession.shared.token)
            DispatchQueue.main.async {
            self.tableView.reloadData()
            self.loadFriendsSections()
-        }
+        }*/
         
         //searchBar.delegate = self
         

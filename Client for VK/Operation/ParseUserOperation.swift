@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ParseGroupsOperation: Operation {
+class ParseUserOperation: Operation {
     
     private let db = DataBaseService()
     
