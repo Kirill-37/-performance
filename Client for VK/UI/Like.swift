@@ -20,7 +20,7 @@ class LikeButton: UIButton {
         }
     }
     
-    private var likeCount = 776
+    private var likeCount = 0
     func like() {
         liked = !liked
     }

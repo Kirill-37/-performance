@@ -6,6 +6,7 @@
 //  Copyright © 2019 Кирилл Харузин. All rights reserved.
 //
 
+// MARK: HW №1 -performance
 import UIKit
 
 class NewsCell: UITableViewCell {
@@ -14,6 +15,7 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var pic: UIImageView!
     
     @IBOutlet weak var news: UILabel!
     

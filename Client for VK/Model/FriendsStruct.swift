@@ -15,7 +15,6 @@ class Friends: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var surname: String = ""
     @objc dynamic var photo: String = ""
-    var photos = List<Photos>()
 
 override class func primaryKey() -> String? {
        return "id"
