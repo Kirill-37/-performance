@@ -15,6 +15,7 @@ class NewsViewController: UITableViewController {
     var castomRefreshControl = UIRefreshControl()
     private let queue: DispatchQueue = DispatchQueue(label: "News_queue", qos: .userInteractive, attributes: [.concurrent])
     let vkAPI = VKApi()
+    var photoService: PhotoService?
     let db = DataBaseService()
     var sections: [Results<News>] = []
     var tokens: [NotificationToken] = []
@@ -65,10 +66,9 @@ class NewsViewController: UITableViewController {
         
         vkAPI.getNews {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
                 self.loadNewsSections()
+                self.tableView.reloadData()
             }
-            
         }
         addRefreshControl()
     }
@@ -76,19 +76,28 @@ class NewsViewController: UITableViewController {
     //Индикатор обновления при потягивании экрана вниз
     func addRefreshControl() {
         castomRefreshControl.attributedTitle = NSAttributedString(string: "Обновление...")
-        castomRefreshControl.addTarget(self, action: #selector(addRefreshTable), for: .valueChanged)
+        castomRefreshControl.addTarget(self, action: #selector(reloadNews), for: .valueChanged)
         tableView.addSubview(castomRefreshControl)
     }
-   
-    @objc func addRefreshTable() {
+    
+    @objc func reloadNews() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.castomRefreshControl.endRefreshing()
-        }
+        vkAPI.getNews {
+            DispatchQueue.main.async {
+                
+                self.loadNewsSections()
+                self.tableView.reloadData()
+                self.castomRefreshControl.endRefreshing()
+            }
+         }
     }
    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections[section].count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
@@ -102,17 +111,21 @@ class NewsViewController: UITableViewController {
             cell?.username.text = source.name
             cell?.time.text = dateConverter(inputDate: news.date)
             let imageURL = source.photo
-            queue.async {
-                if let image = self.vkAPI.getImageByURL(imageUrl: imageURL) {
+            /*queue.async {
+                if let image = self.vkAPI.getImageByURL(imageUrl: imageURL)
                     
-                    DispatchQueue.main.async {
-                        cell?.avatar.image = image
-                    }
-                }
-            }
-        }
-        
-        cell?.pic.image = UIImage(imageLiteralResourceName: "pic")
+                {
+                   DispatchQueue.main.async {*/
+            cell?.avatar.image = photoService?.photo(atIndexpath: indexPath, byUrl: imageURL)
+                     //}
+                //}
+            //}
+            
+            let imageNewsURL = news.imageURL
+            //if let imageNews = self.vkAPI.getImageByURL(imageUrl: imageNewsURL ) {
+            cell?.pic.image = photoService?.photo(atIndexpath: indexPath, byUrl: imageNewsURL)
+            //}
+         }
         
         return cell!
     }
@@ -128,6 +141,4 @@ class NewsViewController: UITableViewController {
         let convertedDate = dateFormatter.string(from: date as Date)
         return convertedDate
     }
-
-    
 }

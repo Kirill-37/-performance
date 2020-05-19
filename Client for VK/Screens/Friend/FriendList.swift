@@ -15,6 +15,7 @@ import Alamofire
 class FriendList: UITableViewController {
     
     let vkAPI = VKApi()
+    var photoService: PhotoService?
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -119,7 +120,7 @@ class FriendList: UITableViewController {
         }
         
         
-        let queue = DispatchQueue(label: "Friends_avatar_download_queue")
+       /* let queue = DispatchQueue(label: "Friends_avatar_download_queue")
         
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
@@ -138,7 +139,7 @@ class FriendList: UITableViewController {
                     }
                 }
             }
-        }
+        }*/
            
            override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTemplate", for: indexPath) as? FriendCell else {
@@ -149,11 +150,11 @@ class FriendList: UITableViewController {
             cell.username.text = sections[indexPath.section][indexPath.row].name + " " + sections[indexPath.section][indexPath.row].surname
             
             let url = sections[indexPath.section][indexPath.row].photo
-            if let cashed = cachedAvatars[url] {
-                cell.avatar.image = cashed
-            } else {
+            //if let cashed = cachedAvatars[url] {
+            cell.avatar.image = photoService?.photo(atIndexpath: indexPath, byUrl: url)
+            /*} else {
                 downloadImage(for: url, indexPath: indexPath)
-            }
+            }*/
                 
                 return cell
             }

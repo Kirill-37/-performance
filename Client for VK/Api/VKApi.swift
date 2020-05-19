@@ -132,7 +132,7 @@ class VKApi {
         let requestURL = vkURL + path
         AF.request(requestURL,
                    method: .post,
-                   parameters: params).responseJSON(queue: queue) { (response) in
+                   parameters: params).responseJSON(queue: queue) { [completion] (response) in
                     if let error = response.error {
                         print(error)
                     } else {
@@ -146,6 +146,8 @@ class VKApi {
                         self.db.saveObjects(objects: news)
                         self.db.saveObjects(objects: sourceGroups)
                         self.db.saveObjects(objects: sourceUsers)
+                        
+                        completion()
                         
                     }
         }

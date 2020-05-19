@@ -16,6 +16,7 @@ class GroupList: UITableViewController {
       @IBOutlet weak var searchBarGroup: UISearchBar!
     
     let vkAPI = VKApi()
+    var photoService: PhotoService?
     
     var sections: [Results<Groups>] = []
     var tokens: [NotificationToken] = []
@@ -86,7 +87,7 @@ class GroupList: UITableViewController {
         }
         
         
-        let queue = DispatchQueue(label: "Groups_avatar_download_queue")
+        /*let queue = DispatchQueue(label: "Groups_avatar_download_queue")
         
         private func downloadImage( for url: String, indexPath: IndexPath ) {
             queue.async {
@@ -105,7 +106,7 @@ class GroupList: UITableViewController {
                     }
                 }
             }
-        }
+        }*/
            
            override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTemplate", for: indexPath) as? GroupCell else {
@@ -116,11 +117,11 @@ class GroupList: UITableViewController {
             cell.groupId.text = sections[indexPath.section][indexPath.row].name
             
             let url = sections[indexPath.section][indexPath.row].photo
-            if let cashed = cachedAvatars[url] {
-                cell.groupAva.image = cashed
-            } else {
+            //if let cashed = cachedAvatars[url] {
+            cell.groupAva.image = photoService?.photo(atIndexpath: indexPath, byUrl: url)
+           /* } else {
                 downloadImage(for: url, indexPath: indexPath)
-            }
+            }*/
                 
                 return cell
             }

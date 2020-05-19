@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D494A9DDC92F8EC3CC853673 /* Pods_Client_for_VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CCC8E261EF01DBF9957B89 /* Pods_Client_for_VK.framework */; };
+		F110FBFF2473FF9100091764 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F110FBFE2473FF9100091764 /* PhotoService.swift */; };
 		F126CD46238D673D00730FDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126CD45238D673D00730FDA /* AppDelegate.swift */; };
 		F126CD48238D673D00730FDA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126CD47238D673D00730FDA /* SceneDelegate.swift */; };
 		F126CD4A238D673D00730FDA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126CD49238D673D00730FDA /* LoginViewController.swift */; };
@@ -68,6 +69,7 @@
 		13DD2C880A39CE24862E7397 /* Pods-Client for VK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client for VK.release.xcconfig"; path = "Target Support Files/Pods-Client for VK/Pods-Client for VK.release.xcconfig"; sourceTree = "<group>"; };
 		A4CCC8E261EF01DBF9957B89 /* Pods_Client_for_VK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Client_for_VK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5097937B244CE7D64BEAEC9 /* Pods-Client for VK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Client for VK.debug.xcconfig"; path = "Target Support Files/Pods-Client for VK/Pods-Client for VK.debug.xcconfig"; sourceTree = "<group>"; };
+		F110FBFE2473FF9100091764 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		F126CD42238D673D00730FDA /* Client for VK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Client for VK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F126CD45238D673D00730FDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F126CD47238D673D00730FDA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				F1A0D9DE243B95D500AD4572 /* DataBaseService.swift */,
+				F110FBFE2473FF9100091764 /* PhotoService.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				F1634BF023A3A77800F9B59F /* CircleImage.swift in Sources */,
 				F148C3ED23DEEF540072376F /* VKApi.swift in Sources */,
 				F1A0D9DF243B95D500AD4572 /* DataBaseService.swift in Sources */,
+				F110FBFF2473FF9100091764 /* PhotoService.swift in Sources */,
 				F197D1FF24585D7F00794FB4 /* NewsSource.swift in Sources */,
 				F197D1FB24585D1300794FB4 /* ParserService.swift in Sources */,
 				F126CD46238D673D00730FDA /* AppDelegate.swift in Sources */,
