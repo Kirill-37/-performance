@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private let rightLogin = "123"
     private let rightPassword = "123"
-   
+    
     @IBOutlet weak var logoVK: UIImageView!
     
     @IBAction func webLoginButton(_ sender: Any) {
@@ -45,14 +45,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(hideAction)
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
         login.delegate = self
         password.delegate = self
-        //createFriends()
     }
     
     //Скрытие клавиатуры при тапе в любое место экрана
@@ -64,7 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: titleAction, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-        }
+    }
     
     func textFieldShouldReturn (_ textField: UITextField) -> Bool {
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
@@ -75,29 +74,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
-    /*func createFriends() {
-        let friends = []
-            .enumerated().map { (offset, value) -> Friends in
-                let friend = Friends()
-                friend.id = offset
-                friend.name = value as! String
-                return friend
-        }
-        
-        do {
-            Realm.Configuration.defaultConfiguration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            let realm = try Realm()
-            print(realm.configuration.fileURL)
-            realm.beginWrite()
-            realm.add(friends, update: .modified)
-            try realm.commitWrite()
-        }
-        catch {
-            print(error.localizedDescription)
-        }
-        
-    }*/
-    
 }
 
 

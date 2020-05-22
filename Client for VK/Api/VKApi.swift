@@ -109,15 +109,15 @@ class VKApi {
     }
     
     func getImageByURL(imageUrl: String) -> UIImage? {
-              let urlString = imageUrl
-                  guard let url = URL(string: urlString) else { return nil }
-                  
-                  if let imageData: Data = try? Data(contentsOf: url) {
-                      return UIImage(data: imageData)
-                  }
-                  
-                  return nil
-          }
+        let urlString = imageUrl
+        guard let url = URL(string: urlString) else { return nil }
+        
+        if let imageData: Data = try? Data(contentsOf: url) {
+            return UIImage(data: imageData)
+        }
+        
+        return nil
+    }
     
     func getNews(completion: @escaping () -> Void) {
         

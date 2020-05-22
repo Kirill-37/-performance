@@ -10,8 +10,8 @@ import Alamofire
 import SwiftyJSON
 
 class ParserService {
-
-func parseFriends(data: Data) -> [Friends] {
+    
+    func parseFriends(data: Data) -> [Friends] {
         do {
             let json = try JSON(data: data)
             let array = json["response"]["items"].arrayValue
@@ -40,13 +40,13 @@ func parseFriends(data: Data) -> [Friends] {
             let json = try JSON(data: data)
             let array = json["response"]["items"].arrayValue
             
-         let result = array.map { item -> Groups in
-             let groups = Groups()
-            
-                 groups.name = item["name"].stringValue
-                 groups.photo = item["photo_50"].stringValue
-                 groups.type = item["activity"].stringValue
-                 groups.id = item["id"].intValue
+            let result = array.map { item -> Groups in
+                let groups = Groups()
+                
+                groups.name = item["name"].stringValue
+                groups.photo = item["photo_50"].stringValue
+                groups.type = item["activity"].stringValue
+                groups.id = item["id"].intValue
                 
                 return groups
             }
@@ -58,11 +58,11 @@ func parseFriends(data: Data) -> [Friends] {
             return []
         }
     }
-
-      
-
-
-        func parsePhotos(data: Data) -> [Photos] {
+    
+    
+    
+    
+    func parsePhotos(data: Data) -> [Photos] {
         do {
             let json = try JSON(data: data)
             let array = json["response"]["items"].arrayValue
@@ -90,7 +90,7 @@ func parseFriends(data: Data) -> [Friends] {
     }
     
     func parseNews(data: Data) -> [News] {
-
+        
         do {
             let json = try JSON(data: data)
             let array = json["response"]["items"].arrayValue
@@ -127,13 +127,13 @@ func parseFriends(data: Data) -> [Friends] {
     }
     
     func parseSourceGroups(data: Data) -> [NewsSource] {
-
+        
         do {
             let json = try JSON(data: data)
             let array = json["response"]["groups"].arrayValue
             
             let result = array.map { item -> NewsSource in
-            
+                
                 let sourceGroup = NewsSource()
                 
                 sourceGroup.id = item["id"].intValue
@@ -153,7 +153,7 @@ func parseFriends(data: Data) -> [Friends] {
     }
     
     func parseSourceUsers(data: Data) -> [NewsSource] {
-
+        
         do {
             let json = try JSON(data: data)
             let array = json["response"]["profiles"].arrayValue

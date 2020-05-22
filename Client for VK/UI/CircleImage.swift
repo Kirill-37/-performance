@@ -11,7 +11,7 @@ import UIKit
 class CircleImageView: UIView {
     var circleImage: UIImageView!
     
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +23,7 @@ class CircleImageView: UIView {
         addImage()
     }
     
-  
+    
     
     func addImage() {
         circleImage = UIImageView(frame: frame)
@@ -34,8 +34,6 @@ class CircleImageView: UIView {
         circleImage.frame = bounds
         
         layer.backgroundColor = UIColor.clear.cgColor
-        /*layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 1.0*/
         layer.shadowRadius = 4.0
         layer.shadowOffset = CGSize(width: 0, height: 1)
         
@@ -43,5 +41,5 @@ class CircleImageView: UIView {
         circleImage.layer.masksToBounds = true
     }
     
-  
+    
 }
