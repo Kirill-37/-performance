@@ -6,7 +6,6 @@
 //  Copyright © 2019 Кирилл Харузин. All rights reserved.
 //
 
-// MARK: HW №1 -performance
 import UIKit
 import RealmSwift
 
@@ -22,41 +21,39 @@ class NewsViewController: UITableViewController {
     var like = LikeButton()
     
     func loadNewsSections() {
-    do {
-        tokens.removeAll()
-        let realm = try Realm()
-        sections = Array( arrayLiteral: realm.objects(News.self).sorted(byKeyPath: "date", ascending: false) )
-        sections.enumerated().forEach{ observeChanges(section: $0.offset, results: $0.element) }
-        tableView.reloadData()
-    }
-    catch {
-        print(error.localizedDescription)
-    }
+        do {
+            tokens.removeAll()
+            let realm = try Realm()
+            sections = Array( arrayLiteral: realm.objects(News.self).sorted(byKeyPath: "date", ascending: false) )
+            sections.enumerated().forEach{ observeChanges(section: $0.offset, results: $0.element) }
+            tableView.reloadData()
+        }
+        catch {
+            print(error.localizedDescription)
+        }
     }
     
     func observeChanges(section: Int, results: Results<News>) {
-          tokens.append(
-              results.observe { (changes) in
-                  switch changes {
-                  case .initial:
-                      self.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-                      
-                  case .update(_, let deletions, let insertions, let modifications):
-                      self.tableView.beginUpdates()
-                      self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
-                      self.tableView.insertRows(at: insertions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
-                      self.tableView.reloadRows(at: modifications.map{ IndexPath(row: $0, section: section) }, with: .automatic)
-                      self.tableView.endUpdates()
-                  
-                  case .error(let error):
-                      print(error.localizedDescription)
-                  
-                  }
-              }
-          )
-      }
-
-    /*var newsArray = ["Boeing приостанавливает производство 737 MAX. Это связано с отказом американского авиарегулятора разрешить полеты этих самолетов в текущем году. Почему производство 737 MAX не было прекращено сразу после запрета?"]*/
+        tokens.append(
+            results.observe { [weak self] (changes) in
+                switch changes {
+                case .initial:
+                    self?.tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+                    
+                case .update(_, let deletions, let insertions, let modifications):
+                    self?.tableView.beginUpdates()
+                    self?.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
+                    self?.tableView.insertRows(at: insertions.map{ IndexPath(row: $0, section: section) }, with: .automatic)
+                    self?.tableView.reloadRows(at: modifications.map{ IndexPath(row: $0, section: section) }, with: .automatic)
+                    self?.tableView.endUpdates()
+                    
+                case .error(let error):
+                    print(error.localizedDescription)
+                    
+                }
+            }
+        )
+    }
     
     override func viewDidLoad() {
         tableView.register(UINib(nibName: "NewsCell", bundle: nil), forCellReuseIdentifier: "MyNews")
@@ -89,9 +86,9 @@ class NewsViewController: UITableViewController {
                 self.tableView.reloadData()
                 self.castomRefreshControl.endRefreshing()
             }
-         }
+        }
     }
-   
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].count
@@ -109,37 +106,39 @@ class NewsViewController: UITableViewController {
         
         if let source = self.db.getNewsSourceById(id: news.sourceId) {
             cell?.username.text = source.name
-            cell?.time.text = dateConverter(inputDate: news.date)
+            cell?.time.text = getCellDateText(forIndexPath: indexPath, andTimestamp: news.date)
             let imageURL = source.photo
-            /*queue.async {
-                if let image = self.vkAPI.getImageByURL(imageUrl: imageURL)
-                    
-                {
-                   DispatchQueue.main.async {*/
             cell?.avatar.image = photoService.photo(atIndexpath: indexPath, byUrl: imageURL)
-                     //}
-                //}
-            //}
-            
             let imageNewsURL = news.imageURL
-            //if let imageNews = self.vkAPI.getImageByURL(imageUrl: imageNewsURL ) {
             cell?.pic.image = photoService.photo(atIndexpath: indexPath, byUrl: imageNewsURL)
             cell?.likeButton.likeCount = news.likes
-            //}
-         }
+        }
         
         return cell!
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-       return UITableView.automaticDimension
-   }
-    
-    private func dateConverter(inputDate: Double) -> String {
-        let dateFormatter = DateFormatter()
-        let date = NSDate(timeIntervalSince1970: inputDate)
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        let convertedDate = dateFormatter.string(from: date as Date)
-        return convertedDate
+        return UITableView.automaticDimension
     }
+    
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.mm.yyyy HH:mm"
+        return formatter
+    }()
+    
+    private var dateCache: [IndexPath: String] = [:]
+    
+    
+    func getCellDateText(forIndexPath indexPath: IndexPath, andTimestamp timestamp: Double) -> String {
+            if let stringDate = dateCache[indexPath] {
+                return stringDate
+            } else {
+                let date = Date(timeIntervalSince1970: timestamp)
+                let stringDate = dateFormatter.string(from: date)
+                dateCache[indexPath]  = stringDate
+                return stringDate
+            }
+        }
+
 }

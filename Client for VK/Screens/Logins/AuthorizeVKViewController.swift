@@ -14,41 +14,41 @@ import Alamofire
 
 class AuthorizeVKViewController: UIViewController {
     @IBOutlet private weak var webView: WKWebView!
-        
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if UserSession.shared.token != "" {
-                   performSegue(withIdentifier: "ShowTabBar", sender: AnyObject.self)
-               }
-    
-       var urlComponents = URLComponents()
-                urlComponents.scheme = "https"
-                urlComponents.host = "oauth.vk.com"
-                urlComponents.path = "/authorize"
-                urlComponents.queryItems = [URLQueryItem(name: "client_id", value: "7384704"),
-                                            URLQueryItem(name: "display", value: "mobile"),
-                                            URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-                                            URLQueryItem(name: "scope", value: "users,friends,groups,photos,wall"),
-                                            URLQueryItem(name: "response_type", value: "token"),
-                                            URLQueryItem(name: "v", value: "5.103")]
+            performSegue(withIdentifier: "ShowTabBar", sender: AnyObject.self)
+        }
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "oauth.vk.com"
+        urlComponents.path = "/authorize"
+        urlComponents.queryItems = [URLQueryItem(name: "client_id", value: "7384704"),
+                                    URLQueryItem(name: "display", value: "mobile"),
+                                    URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
+                                    URLQueryItem(name: "scope", value: "users,friends,groups,photos,wall"),
+                                    URLQueryItem(name: "response_type", value: "token"),
+                                    URLQueryItem(name: "v", value: "5.103")]
         
         let request = URLRequest(url: urlComponents.url!)
         webView.navigationDelegate = self
         webView.load(request)
-            
+        
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-           
-           if UserSession.shared.token != "" {
-               return true
-           } else {
-               print("Don't have token!")
-               return false
-           }
-           
-       }
+        
+        if UserSession.shared.token != "" {
+            return true
+        } else {
+            print("Don't have token!")
+            return false
+        }
+        
+    }
     
     
 }

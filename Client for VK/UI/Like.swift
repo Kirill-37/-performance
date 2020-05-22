@@ -21,11 +21,11 @@ class LikeButton: UIButton {
     }
     
     var likeCount = 0 {
-    didSet {
-    setImage(UIImage(named: "like"), for: .normal)
-    setTitle(String(describing: likeCount), for: .normal)
-    tintColor = likeCount > 0 ? .red : .gray
-    }
+        didSet {
+            setImage(UIImage(named: "like"), for: .normal)
+            setTitle(String(describing: likeCount), for: .normal)
+            tintColor = likeCount > 0 ? .red : .gray
+        }
     }
     
     
@@ -72,14 +72,14 @@ class LikeButton: UIButton {
     
     //реализация анимации лайк-дизлайк
     func animateAuthButton() {
-       let animation = CASpringAnimation(keyPath: "transform.scale")
-           animation.fromValue = 1.2
-           animation.toValue = 1
-           animation.stiffness = 600
-           animation.mass = 1
-           animation.duration = 3
-           animation.fillMode = CAMediaTimingFillMode.both
-           layer.add(animation, forKey: nil)
-       }
+        let animation = CASpringAnimation(keyPath: "transform.scale")
+        animation.fromValue = 1.2
+        animation.toValue = 1
+        animation.stiffness = 600
+        animation.mass = 1
+        animation.duration = 3
+        animation.fillMode = CAMediaTimingFillMode.both
+        layer.add(animation, forKey: nil)
+    }
     
 }
