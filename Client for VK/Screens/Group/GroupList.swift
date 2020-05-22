@@ -16,7 +16,7 @@ class GroupList: UITableViewController {
       @IBOutlet weak var searchBarGroup: UISearchBar!
     
     let vkAPI = VKApi()
-    var photoService: PhotoService?
+    lazy var photoService: PhotoService = PhotoService(container: self.tableView)
     
     var sections: [Results<Groups>] = []
     var tokens: [NotificationToken] = []
@@ -118,7 +118,7 @@ class GroupList: UITableViewController {
             
             let url = sections[indexPath.section][indexPath.row].photo
             //if let cashed = cachedAvatars[url] {
-            cell.groupAva.image = photoService?.photo(atIndexpath: indexPath, byUrl: url)
+            cell.groupAva.image = photoService.photo(atIndexpath: indexPath, byUrl: url)
            /* } else {
                 downloadImage(for: url, indexPath: indexPath)
             }*/

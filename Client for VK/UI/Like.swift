@@ -20,7 +20,15 @@ class LikeButton: UIButton {
         }
     }
     
-    private var likeCount = 0
+    var likeCount = 0 {
+    didSet {
+    setImage(UIImage(named: "like"), for: .normal)
+    setTitle(String(describing: likeCount), for: .normal)
+    tintColor = likeCount > 0 ? .red : .gray
+    }
+    }
+    
+    
     func like() {
         liked = !liked
     }

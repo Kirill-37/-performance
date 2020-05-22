@@ -20,7 +20,7 @@ class NewsCell: UITableViewCell {
     @IBOutlet weak var news: UILabel!
     
     @IBAction func addLike(_ sender: Any) {
-            (sender as! LikeButton).like()
+        (sender as! LikeButton).like()
     }
     
 

@@ -15,7 +15,7 @@ import Alamofire
 class FriendList: UITableViewController {
     
     let vkAPI = VKApi()
-    var photoService: PhotoService?
+    lazy var photoService: PhotoService = PhotoService(container: self.tableView)
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -151,7 +151,7 @@ class FriendList: UITableViewController {
             
             let url = sections[indexPath.section][indexPath.row].photo
             //if let cashed = cachedAvatars[url] {
-            cell.avatar.image = photoService?.photo(atIndexpath: indexPath, byUrl: url)
+            cell.avatar.image = photoService.photo(atIndexpath: indexPath, byUrl: url)
             /*} else {
                 downloadImage(for: url, indexPath: indexPath)
             }*/

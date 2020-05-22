@@ -15,7 +15,7 @@ class NewsViewController: UITableViewController {
     var castomRefreshControl = UIRefreshControl()
     private let queue: DispatchQueue = DispatchQueue(label: "News_queue", qos: .userInteractive, attributes: [.concurrent])
     let vkAPI = VKApi()
-    var photoService: PhotoService?
+    lazy var photoService: PhotoService = PhotoService(container: self.tableView)
     let db = DataBaseService()
     var sections: [Results<News>] = []
     var tokens: [NotificationToken] = []
@@ -116,14 +116,15 @@ class NewsViewController: UITableViewController {
                     
                 {
                    DispatchQueue.main.async {*/
-            cell?.avatar.image = photoService?.photo(atIndexpath: indexPath, byUrl: imageURL)
+            cell?.avatar.image = photoService.photo(atIndexpath: indexPath, byUrl: imageURL)
                      //}
                 //}
             //}
             
             let imageNewsURL = news.imageURL
             //if let imageNews = self.vkAPI.getImageByURL(imageUrl: imageNewsURL ) {
-            cell?.pic.image = photoService?.photo(atIndexpath: indexPath, byUrl: imageNewsURL)
+            cell?.pic.image = photoService.photo(atIndexpath: indexPath, byUrl: imageNewsURL)
+            cell?.likeButton.likeCount = news.likes
             //}
          }
         
